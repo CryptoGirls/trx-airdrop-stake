@@ -36,7 +36,7 @@ sudo apt-get install -y nodejs
 
 ```
 
-To not send the private key in plain text to the network, it's recommended to install and configure docker containers made by Rovak. If you won't use the docker, we strongly recommend to use a smaller wallet from which to send the tokens because it can be compromised.
+To not send the private key in plain text to the network, it's recommended to install and configure docker containers made by Rovak. If you won't use the docker, we strongly recommend to use a smaller wallet from which to send the TRX because it can be compromised.
 
 ```
 apt install docker docker-compose
@@ -73,7 +73,7 @@ Edit config.json and modify the lines with your settings:
 - sraddress: Super Representative's address. This field is mandatory ONLY if you want to give a bonus to the SR's voters
 - owneraddress: The addres from where the TRX payments will be broadcasted
 - node: node where you get data
-- nodepay: node used for payments. It's recommended to change the nodepay to http://127.0.0.1:9000 after clone and install Rovak's docker containers repo (Please see the details in dependencies section). If you won't use the docker, don't change the nodepay but we strongly recommend to use a smaller wallet from which to send the tokens because it can be compromised.
+- nodepay: node used for payments. It's recommended to change the nodepay to http://127.0.0.1:9000 after clone and install Rovak's docker containers repo (Please see the details in dependencies section). If you won't use the docker, don't change the nodepay but we strongly recommend to use a smaller wallet from which to send the TRX because it can be compromised.
 - amount: total amount of TRX to distribute (bonuses will be included in this amount)
 - percentagebonusforvoters: percentage you want to give as bonus to the SR's voters; 0 for no bonuses
 - minpayout: the minimum amount for a payout, up to 6 decimals.
@@ -112,14 +112,14 @@ If you want to run a private pool, you need to edit config.json and:
 
 ```node votes.js```
 
-3. Run tokenairdrop.py and press Y/N for saving or not the data. For multiple tests you have to save the original poollogs.json file before running this command. After every test, replace the new poollogs.json file with the original one to test it again. Otherwise, in this file the amounts of every holder will be added at every run.
+3. Run trxairdrop.py and press Y/N for saving or not the data. For multiple tests you have to save the original poollogs.json file before running this command. After every test, replace the new poollogs.json file with the original one to test it again. Otherwise, in this file the amounts of every holder will be added at every run.
 Also, the script will prepare the payments to be broadcasted by creating a file called "payments.sh". After running the following command, you can check holders' amounts in poollogs.json file and verify payments commands in payments.sh
 
-```python3 tokenairdrop.py```
+```python3 trxairdrop.py```
 
 The command can be run with autosave parameter:
 
-```python3 tokenairdrop.py -y```
+```python3 trxairdrop.py -y```
 
 4. Open payments.sh file. You can pick a single line beginning with "curl..." with a small amount of TRX to run it directly from the terminal for testing. Note: amounts are in SUN (1 TRX = 1000000 SUN). The minimum amount for a transaction is 1 SUN that means 0.000001 TRX.
 
@@ -134,13 +134,13 @@ The command can be run with autosave parameter:
 
 ```node votes.js```
 
-3. Run tokenairdrop.py and press Y/N for saving or not the data (the script will create a file called "payments.sh")
+3. Run trxairdrop.py and press Y/N for saving or not the data (the script will create a file called "payments.sh")
 
-```python3 tokenairdrop.py```
+```python3 trxairdrop.py```
 
 The command can be run with autosave parameter:
 
-```python3 tokenairdrop.py -y```
+```python3 trxairdrop.py -y```
 
 The file "payments.sh" will have all the payments shell commands. Run this file with:
 
@@ -159,7 +159,7 @@ The scripts are also runnable by cron.
 
 `chmod +x voters.sh`
 
-`chmod +x tokenairdrop.sh`
+`chmod +x trxairdrop.sh`
 
 - execute the scripts
 
@@ -167,7 +167,7 @@ The scripts are also runnable by cron.
 
 `./voters.sh`
 
-`./tokenairdrop.sh`
+`./trxairdrop.sh`
 
 
 ## Author
@@ -179,7 +179,7 @@ use this software:
 - "8691988869124917015R" for rise
 
 ## Features added by CryptoGirls
-- adapted the script for TRX tokens airdrops
+- adapted the script for TRX airdrops
 
 Please consider a small donation if you use this software:
 - TRX: "TQk7fK1WfRqothSdTQBoYf7o81Byohzb1Y"
