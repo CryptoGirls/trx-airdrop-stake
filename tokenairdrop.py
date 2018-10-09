@@ -103,7 +103,7 @@ def createPaymentLine (to, amount):
 	broadcast=True
 	data = {"contract": {"ownerAddress": conf['owneraddress'], "toAddress": to, "amount": round( amount * 1000000)}, "key": conf['pk'], "broadcast": broadcast}
 	nodepay = conf['nodepay']
-	return 'curl -X POST "' + nodepay + '/api/transaction-builder/contract/transferasset" -H "accept: application/json" -H "Content-Type: application/json" -d \'' + json.dumps (data) + '\' ' + "\n\nsleep 1\n"
+	return 'curl -X POST "' + nodepay + '/api/transaction-builder/contract/transfer" -H "accept: application/json" -H "Content-Type: application/json" -d \'' + json.dumps (data) + '\' ' + "\n\nsleep 1\n"
 
 
 def estimatePayouts (log,voterslog,accountslog):
