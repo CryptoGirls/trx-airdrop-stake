@@ -1,6 +1,6 @@
-# TRX token airdrop stake software
+# TRX airdrop stake software
 
-Use: To airdrop TOKENS to the holders of a specific token based on their stake proportion on the total circulating supply of that token. If configured, the script gives a bonus to the holders (a proportion from their token balances) if they are voters of a specific SR.
+Use: To airdrop TRX to the holders of a specific token based on their stake proportion on the total circulating supply of that token. If configured, the script gives a bonus to the holders (a proportion from their TRX rewards) if they are voters of a specific SR.
 
 ## Dependencies
 ```
@@ -18,9 +18,9 @@ sudo pip3 install psycopg2-binary
 
 sudo pip3 install termcolor
 
-git clone https://github.com/CryptoGirls/trx-token-airdrop-stake
+git clone https://github.com/CryptoGirls/trx-airdrop-stake
 
-cd trx-token-airdrop-stake
+cd trx-airdrop-stake
 
 sudo apt install nodejs
 
@@ -69,20 +69,20 @@ Now you should be able to call the API from http://127.0.0.1:9000
 Edit config.json and modify the lines with your settings:
 
 - coin: TRX
-- token: token name. It will be used to get the holders' wallets data that own this token
+- token: token name. Not used
 - sraddress: Super Representative's address. This field is mandatory ONLY if you want to give a bonus to the SR's voters
-- owneraddress: The addres from where the token payments will be broadcasted
+- owneraddress: The addres from where the TRX payments will be broadcasted
 - node: node where you get data
 - nodepay: node used for payments. It's recommended to change the nodepay to http://127.0.0.1:9000 after clone and install Rovak's docker containers repo (Please see the details in dependencies section). If you won't use the docker, don't change the nodepay but we strongly recommend to use a smaller wallet from which to send the tokens because it can be compromised.
-- amount: total amount of tokens to distribute (bonuses will be included in this amount)
+- amount: total amount of TRX to distribute (bonuses will be included in this amount)
 - percentagebonusforvoters: percentage you want to give as bonus to the SR's voters; 0 for no bonuses
-- minpayout: the minimum amount for a payout, must be integer (no decimals). Note: All the transactions will be broadcasted with integer token amounts.
+- minpayout: the minimum amount for a payout, up to 6 decimals.
 - pk: the private key of the address from which the payments will be sent
 - donations: a list of objects (address: amount) for send static amount every payout
 - donationspercentage: a list of objects (address: percentage) for send static percentage every payout
 - skip: a list of addresses to skip. The script will get all the addresses in the network that own that specific token. To skip the issuer's wallet you must add that address here. Example: "skip": ["ISSUER_ADDRESS"]
 
-Edit the following line in accounts.js by replacing TOKEN_NAME with the token name:
+Edit the following line in accounts.js by replacing TOKEN_NAME with the token name from witch the script will calculate the proportions:
 
 ```
 let {data} = await xhr.get("https://api.tronscan.org/api/token/TOKEN_NAME/address", {
@@ -121,7 +121,7 @@ The command can be run with autosave parameter:
 
 ```python3 tokenairdrop.py -y```
 
-4. Open payments.sh file. You can pick a single line beginning with "curl..." with a small amount of tokens to run it directly from the terminal for testing.
+4. Open payments.sh file. You can pick a single line beginning with "curl..." with a small amount of TRX to run it directly from the terminal for testing. Note: amounts are in SUN (1 TRX = 1000000 SUN). The minimum amount for a transaction is 1 SUN that means 0.000001 TRX.
 
 
 ## Running it
